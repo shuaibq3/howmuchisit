@@ -1,23 +1,22 @@
-import { isMaxSafeInteger, isMinSafeInteger } from '../../utils/numberUtils'
+import GenericError from '../../utils/errors/GenericError'
+import { getNumericValue } from '../../utils/numberUtils'
 
-describe('isMaxSafeInteger', () => {
-  it('should return true for a number less than or equal to MAX_SAFE_INTEGER', () => {
-    expect(isMaxSafeInteger(Number.MAX_SAFE_INTEGER)).toBe(true)
-    expect(isMaxSafeInteger(100)).toBe(true)
+describe('getNumberValue', () => {
+  it('should return a number for a valid number string within safe integer range', () => {
+    expect(getNumericValue('100')).toBe(100)
+    expect(getNumericValue(String(Number.MAX_SAFE_INTEGER))).toBe(Number.MAX_SAFE_INTEGER)
   })
 
-  it('should return false for a number greater than MAX_SAFE_INTEGER', () => {
-    expect(isMaxSafeInteger(Number.MAX_SAFE_INTEGER + 1)).toBe(false)
-  })
-})
+  it('should return a bigint for a valid number string outside safe integer range', () => {
+    const largerThanMaxSafeInteger = getNumericValue(String(Number.MAX_SAFE_INTEGER + 1))
+    const smallerThanMinSafeInteger = getNumericValue(String(Number.MIN_SAFE_INTEGER - 1))
 
-describe('isMinSafeInteger', () => {
-  it('should return true for a number greater than or equal to MIN_SAFE_INTEGER', () => {
-    expect(isMinSafeInteger(Number.MIN_SAFE_INTEGER)).toBe(true)
-    expect(isMinSafeInteger(-100)).toBe(true)
+    expect(typeof largerThanMaxSafeInteger).toBe('bigint')
+    expect(typeof smallerThanMinSafeInteger).toBe('bigint')
   })
 
-  it('should return false for a number less than MIN_SAFE_INTEGER', () => {
-    expect(isMinSafeInteger(Number.MIN_SAFE_INTEGER - 1)).toBe(false)
+  it('should throw an error for an invalid number string', () => {
+    expect(() => getNumericValue('abc')).toThrow(new GenericError('notInt'))
+    expect(() => getNumericValue('123abc')).toThrow(new GenericError('notInt'))
   })
 })
