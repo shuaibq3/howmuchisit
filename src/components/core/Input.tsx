@@ -9,9 +9,9 @@ type InputComponentProps = {
     classNames?: string[];
 };
 
-const Input = ({value = '', errorMessage, handleChange, inputType, placeholderText = '', classNames}: InputComponentProps) => {
+const Input = ({ value = '', errorMessage, handleChange, inputType, placeholderText = '', classNames }: InputComponentProps) => {
   return (
-    <div className={classNames?.join(' ')} style={{display: 'flex', flexDirection: 'column'}}>
+    <div className={classNames?.join(' ')} style={{ display: 'flex', flexDirection: 'column' }}>
       {errorMessage && <span className="error-label">{errorMessage}</span>}
       <input 
         type={inputType}
