@@ -20,10 +20,13 @@ export default [
   },
   {
     rules: {
-      'indent': ['error', 2],
+      'indent': ['error', 2, { 'SwitchCase': 1 }],
       'semi': ['error', 'never'],
       'object-curly-spacing': ['error', 'always'],
-      'quotes': ['error', 'single']
+      'quotes': ['error', 'single'],
+      'space-before-blocks': ['error', 'always'],
+      'space-before-function-paren': ['error', 'never'],
+      'keyword-spacing': ['error', { 'before': true, 'after': true, 'overrides': { 'if': { 'after': true } } }]
     }
   }
 ]
