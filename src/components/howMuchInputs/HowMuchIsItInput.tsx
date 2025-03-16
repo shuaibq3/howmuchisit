@@ -1,8 +1,8 @@
-import React from "react"
-import Input from "../core/Input"
-import Button from "../core/Button"
-import useHowMuchInputHook from "./useHowMuchInput"
-import useHowMuchSubmitButtonHook from "./useHowMuchSubmitButton"
+import React from 'react'
+import Input from '../core/Input'
+import Button from '../core/Button'
+import useHowMuchInputHook from './useHowMuchInput'
+import useHowMuchSubmitButtonHook from './useHowMuchSubmitButton'
 
 const HowMuchIsItInput: React.FC = () => {
   const { inputValue, errorMessage, handleChange } = useHowMuchInputHook()

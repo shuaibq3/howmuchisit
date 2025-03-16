@@ -1,6 +1,6 @@
 
-import { useState } from "react"
-import { getNumericValue } from "../../utils/numberUtils"
+import { useState } from 'react'
+import { getNumericValue } from '../../utils/numberUtils'
 
 const useHowMuchInputHook = () => {
   const [inputValue, setInputValue] = useState<string>('')
