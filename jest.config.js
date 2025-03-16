@@ -8,4 +8,8 @@ export default {
       tsconfig: 'tsconfig.json',
     }],
   },
+  collectCoverage: true,
+  collectCoverageFrom: ['src/**/*.{ts,js}', '!src/**/*.d.ts'],
+  coverageDirectory: 'coverage',
+  coverageReporters: ['text', 'text-summary', 'json'],
 }
