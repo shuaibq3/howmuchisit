@@ -1,6 +1,8 @@
-const Errors: Record<string, { message: string, numericCode: number }> = {
+const Errors = {
   'notInt': { message: 'Value is not a number', numericCode: 500 },
-}
+  'invalidUnit': { message: 'Invalid unit', numericCode: 501 },
+  'invalidUnitConverter': { message: 'Invalid unit converter', numericCode: 502 },
+} as const
 
 type ErrorCode = keyof typeof Errors;
 

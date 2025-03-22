@@ -1,6 +1,6 @@
 import Decimal from 'decimal.js'
 import GenericError from '../../utils/errors/GenericError'
-import { getNumericValue, isLargeNumber } from '../../utils/numberUtils'
+import { getIntegerAndDecimalSeparatedValue, getNumericValue, isInteger, isLargeNumber } from '../../utils/numberUtils'
 
 describe('getNumberValue', () => {
   it('should return a number for a valid number string within safe integer range', () => {
@@ -31,5 +31,52 @@ describe('isLargeNumber', () => {
   it('should return false for a number value', () => {
     expect(isLargeNumber(100)).toBe(false)
     expect(isLargeNumber(Number.MAX_SAFE_INTEGER)).toBe(false)
+  })
+})
+
+describe('isInteger', () => {
+  it('should return true for an integer number', () => {
+    expect(isInteger(100)).toBe(true)
+    expect(isInteger(Decimal(100))).toBe(true)
+  })
+
+  it('should return false for a non-integer number', () => {
+    expect(isInteger(100.5)).toBe(false)
+    expect(isInteger(Decimal(100.5))).toBe(false)
+  })
+
+  it('should return true for a large integer value', () => {
+    expect(isInteger(Decimal(Number.MAX_SAFE_INTEGER).add(1))).toBe(true)
+  })
+
+  it('should return false for a large non-integer value', () => {
+    expect(isInteger(Decimal(Number.MAX_SAFE_INTEGER).add(1.5))).toBe(false)
+  })
+})
+
+describe('getIntegerAndDecimalSeparatedValue', () => {
+  it('should return integer and fractional parts as separate numeric values', () => {
+    const result = getIntegerAndDecimalSeparatedValue(123.456)
+    expect(result).toEqual([123, .456])
+  })
+
+  it('should return only integer part if there is no fractional part', () => {
+    const result = getIntegerAndDecimalSeparatedValue(123)
+    expect(result).toEqual([123, 0])
+  })
+
+  it('should return integer part as 0 if value is less than 1', () => {
+    const result = getIntegerAndDecimalSeparatedValue(0.456)
+    expect(result).toEqual([0, .456])
+  })
+
+  it('should handle negative values correctly', () => {
+    const result = getIntegerAndDecimalSeparatedValue(-123.456)
+    expect(result).toEqual([-123, .456])
+  })
+
+  it('should handle negative values without fractional part correctly', () => {
+    const result = getIntegerAndDecimalSeparatedValue(-123)
+    expect(result).toEqual([-123, 0])
   })
 })
