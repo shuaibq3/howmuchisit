@@ -3,10 +3,9 @@ export default {
   testEnvironment: 'jest-environment-jsdom',
   testMatch: ['**/src/tests/**/*.test.ts'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  testPathIgnorePatterns: ['/node_modules/', '/dist/'],
   transform: {
-    '^.+\\.tsx?$': ['ts-jest', {
-      tsconfig: 'tsconfig.json',
-    }],
+    '^.+\\.tsx?$': ['ts-jest', { isolatedModules: true, tsconfig: 'tsconfig.json' }],
   },
   collectCoverage: true,
   collectCoverageFrom: ['src/**/*.{ts,js}', '!src/**/*.d.ts'],
