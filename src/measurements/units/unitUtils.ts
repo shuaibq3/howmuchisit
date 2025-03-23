@@ -11,17 +11,17 @@ export function getMeasurementUnitsStandard(unit: Unit, type?: MeasurementType):
     : MeasurementStandard.imperial
 }
 
-export function getSortedMeasurementUnitsForType(type: MeasurementType, standard?: MeasurementStandard): MeasurementUnit<MeasurementType>[] {
+export function getSortedMeasurementUnitsForType<T extends MeasurementType>(type: T, standard?: MeasurementStandard): MeasurementUnit<T>[] {
   const unitConverter = getUnitConverter(type)
   
   const getMeasurementUnits = (): MeasurementUnit<MeasurementType>[] => {
     if (standard) {
-      return standard === MeasurementStandard.international ? InternationalUnits[type] : ImperialUnits[type]
+      return (standard === MeasurementStandard.international ? InternationalUnits[type] : ImperialUnits[type])
     }
     return Array.from(new Set([...InternationalUnits[type], ...ImperialUnits[type]]))
   }
   
-  const measurementUnits = getMeasurementUnits()
+  const measurementUnits = getMeasurementUnits() as MeasurementUnit<T>[]
   return measurementUnits.map(unit => unitConverter.getUnitConvertedValue({ value: 1, unit: measurementUnits[0] }, unit))
     .sort((measurementA, measurementB) => (measurementB.value as number) - (measurementA.value as number))
     .map(measurement => measurement.unit)
