@@ -1,91 +1,13 @@
 import BreakdownUnitsImpl from '../../../measurements/unitsBreakdown/BreakdownUnitsImpl'
 import { MeasurementStandard, LengthUnits, Unit } from '../../../measurements/units/units'
 import MeasurementType from '../../../measurements/config/types'
-import LengthUnitConverter from '../../../measurements/unitsConverter/LengthUnitConverter'
+import UniversalUnitConverter from '../../../measurements/unitsConverter/UniversalUnitConverter'
+import LengthConversionFactors from '../../../measurements/unitsConverter/conversionStrategy/lengthConversionFactors'
 
 describe('BreakdownLengthUnits', () => {
-  const lengthUnitConverter = new LengthUnitConverter()
-
-  describe('BreakdownUnitsImpl for all length units', () => {
-    const breakdownUnits = new BreakdownUnitsImpl(MeasurementType.length)
-
-    describe('getNextTimeUnit', () => {
-      it('should return the next length unit correctly', () => {
-        expect(breakdownUnits['getNextUnit'](Unit.millimeter)).toBe(Unit.centimeter)
-        expect(breakdownUnits['getNextUnit'](Unit.centimeter)).toBe(Unit.inch)
-        expect(breakdownUnits['getNextUnit'](Unit.inch)).toBe(Unit.foot)
-        expect(breakdownUnits['getNextUnit'](Unit.foot)).toBe(Unit.yard)
-        expect(breakdownUnits['getNextUnit'](Unit.yard)).toBe(Unit.meter)
-        expect(breakdownUnits['getNextUnit'](Unit.meter)).toBe(Unit.kilometer)
-        expect(breakdownUnits['getNextUnit'](Unit.kilometer)).toBe(Unit.mile)
-        expect(breakdownUnits['getNextUnit'](Unit.mile)).toBe(Unit.lightyear)
-        expect(breakdownUnits['getNextUnit'](Unit.lightyear)).toBe(Unit.lightyear)
-      })
-    })
-  
-    describe('getPreviousUnit', () => {
-      it('should return the previous length unit correctly', () => {
-        expect(breakdownUnits['getPreviousUnit'](Unit.lightyear)).toBe(Unit.mile)
-        expect(breakdownUnits['getPreviousUnit'](Unit.mile)).toBe(Unit.kilometer)
-        expect(breakdownUnits['getPreviousUnit'](Unit.kilometer)).toBe(Unit.meter)
-        expect(breakdownUnits['getPreviousUnit'](Unit.meter)).toBe(Unit.yard)
-        expect(breakdownUnits['getPreviousUnit'](Unit.yard)).toBe(Unit.foot)
-        expect(breakdownUnits['getPreviousUnit'](Unit.foot)).toBe(Unit.inch)
-        expect(breakdownUnits['getPreviousUnit'](Unit.inch)).toBe(Unit.centimeter)
-        expect(breakdownUnits['getPreviousUnit'](Unit.centimeter)).toBe(Unit.millimeter)
-        expect(breakdownUnits['getPreviousUnit'](Unit.millimeter)).toBe(Unit.millimeter)
-      })
-    })
-  })
-
-  describe('BreakdownUnitsImpl for international length units', () => {
-    const breakdownUnitsInternational = new BreakdownUnitsImpl(MeasurementType.length, MeasurementStandard.international)
-
-    describe('getNextTimeUnit', () => {
-      it('should return the next length unit correctly', () => {
-        expect(breakdownUnitsInternational['getNextUnit'](Unit.millimeter)).toBe(Unit.centimeter)
-        expect(breakdownUnitsInternational['getNextUnit'](Unit.centimeter)).toBe(Unit.meter)
-        expect(breakdownUnitsInternational['getNextUnit'](Unit.meter)).toBe(Unit.kilometer)
-        expect(breakdownUnitsInternational['getNextUnit'](Unit.kilometer)).toBe(Unit.lightyear)
-        expect(breakdownUnitsInternational['getNextUnit'](Unit.lightyear)).toBe(Unit.lightyear)
-      })
-    })
-  
-    describe('getPreviousUnit', () => {
-      it('should return the previous length unit correctly', () => {
-        expect(breakdownUnitsInternational['getPreviousUnit'](Unit.lightyear)).toBe(Unit.kilometer)
-        expect(breakdownUnitsInternational['getPreviousUnit'](Unit.kilometer)).toBe(Unit.meter)
-        expect(breakdownUnitsInternational['getPreviousUnit'](Unit.meter)).toBe(Unit.centimeter)
-        expect(breakdownUnitsInternational['getPreviousUnit'](Unit.centimeter)).toBe(Unit.millimeter)
-        expect(breakdownUnitsInternational['getPreviousUnit'](Unit.millimeter)).toBe(Unit.millimeter)
-      })
-    })
-  })
-
-  describe('BreakdownUnitsImpl for imperial length units', () => {
-    const breakdownUnitsImperial = new BreakdownUnitsImpl(MeasurementType.length, MeasurementStandard.imperial)
-
-    describe('getNextTimeUnit', () => {
-      it('should return the next length unit correctly', () => {
-        expect(breakdownUnitsImperial['getNextUnit'](Unit.inch)).toBe(Unit.foot)
-        expect(breakdownUnitsImperial['getNextUnit'](Unit.foot)).toBe(Unit.yard)
-        expect(breakdownUnitsImperial['getNextUnit'](Unit.yard)).toBe(Unit.mile)
-        expect(breakdownUnitsImperial['getNextUnit'](Unit.mile)).toBe(Unit.mile)
-      })
-    })
-  
-    describe('getPreviousUnit', () => {
-      it('should return the previous length unit correctly', () => {
-        expect(breakdownUnitsImperial['getPreviousUnit'](Unit.mile)).toBe(Unit.yard)
-        expect(breakdownUnitsImperial['getPreviousUnit'](Unit.yard)).toBe(Unit.foot)
-        expect(breakdownUnitsImperial['getPreviousUnit'](Unit.foot)).toBe(Unit.inch)
-        expect(breakdownUnitsImperial['getPreviousUnit'](Unit.inch)).toBe(Unit.inch)
-      })
-    })
-  })
-  
+  const lengthUnitConverter = new UniversalUnitConverter(LengthConversionFactors)
   /*
-  * Conversion values are tested in LengthUnitConverter unit tests. Here, the unit breakdowns are tested with international units.
+  * Conversion values are tested in UniversalUnitConverter unit tests. Here, the unit breakdowns are tested with international units.
   * Imperial units should work the same way, as the getPreviousUnit and getNextUnit functions return the correct imperial units.
   * The above tests cover the getPreviousUnit and getNextUnit functions.
   */

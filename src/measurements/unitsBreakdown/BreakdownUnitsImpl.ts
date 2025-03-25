@@ -1,16 +1,16 @@
 import { getIntegerAndDecimalSeparatedValue, NumericValue } from '../../utils/numberUtils'
 import { isEqual, isGreaterThan } from '../../utils/numericalOperations'
 import MeasurementType from '../config/types'
-import { Measurement, MeasurementStandard, MeasurementUnit } from '../units/units'
-import { getSortedMeasurementUnitsForType } from '../units/unitUtils'
+import SortedUnitUtils from '../units/SortedUnitUtils'
+import { Measurement, MeasurementStandard } from '../units/units'
 import UnitConverter from '../unitsConverter/UnitConverter'
 import BreakdownInUnits from './BreakdownInUnits'
 
 export default class BreakdownUnitsImpl<T extends MeasurementType> implements BreakdownInUnits<T> {
-  private readonly sortedTimeUnits: MeasurementUnit<T>[]
+  private readonly sortedUnitUtils: SortedUnitUtils<T>
 
   constructor(measurementType: T, measurementStandard?: MeasurementStandard) {
-    this.sortedTimeUnits = getSortedMeasurementUnitsForType(measurementType, measurementStandard)
+    this.sortedUnitUtils = new SortedUnitUtils(measurementType, measurementStandard)
   }
 
   private shouldCalculateForNextUnit(value: NumericValue): boolean {
@@ -22,7 +22,7 @@ export default class BreakdownUnitsImpl<T extends MeasurementType> implements Br
   }
 
   private getAppropriateMeasurementForNextUnit(measurement: Measurement<T>, unitConverter: UnitConverter<T>): Measurement<T> {
-    const nextUnit = this.getNextUnit(measurement.unit)
+    const nextUnit = this.sortedUnitUtils.getNextUnit(measurement.unit)
     if (nextUnit === measurement.unit) {
       return measurement
     }
@@ -34,7 +34,7 @@ export default class BreakdownUnitsImpl<T extends MeasurementType> implements Br
   }
 
   private getAppropriateMeasurementForPreviousUnit(measurement: Measurement<T>, unitConverter: UnitConverter<T>): Measurement<T> {
-    const previousUnit = this.getPreviousUnit(measurement.unit)
+    const previousUnit = this.sortedUnitUtils.getPreviousUnit(measurement.unit)
     if (previousUnit === measurement.unit) {
       return measurement
     }
@@ -55,23 +55,6 @@ export default class BreakdownUnitsImpl<T extends MeasurementType> implements Br
     }
 
     return measurement
-  }
-
-
-  private getNextUnit(currentUnit: MeasurementUnit<T>): MeasurementUnit<T> {
-    const unitIndex = this.sortedTimeUnits.findIndex(unit => unit === currentUnit)
-    if (unitIndex === -1 || !this.sortedTimeUnits[unitIndex + 1]) {
-      return currentUnit
-    }
-    return this.sortedTimeUnits[unitIndex + 1]
-  }
-
-  private getPreviousUnit(currentUnit: MeasurementUnit<T>): MeasurementUnit<T> {
-    const unitIndex = this.sortedTimeUnits.findIndex(unit => unit === currentUnit)
-    if (!this.sortedTimeUnits[unitIndex - 1]) {
-      return currentUnit
-    }
-    return this.sortedTimeUnits[unitIndex - 1]
   }
 
   getUnitsBreakdown(measurement: Measurement<T>, unitConverter: UnitConverter<T>, unitBreakdownFromPreviousIteration: Measurement<T>[] = []): Measurement<T>[] {

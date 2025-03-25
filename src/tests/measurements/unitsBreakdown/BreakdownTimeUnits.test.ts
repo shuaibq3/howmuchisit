@@ -1,76 +1,12 @@
 import BreakdownUnitsImpl from '../../../measurements/unitsBreakdown/BreakdownUnitsImpl'
-import { MeasurementStandard, TimeUnits, Unit } from '../../../measurements/units/units'
-import TimeUnitConverter from '../../../measurements/unitsConverter/TimeConverter'
+import { TimeUnits, Unit } from '../../../measurements/units/units'
 import MeasurementType from '../../../measurements/config/types'
+import UniversalUnitConverter from '../../../measurements/unitsConverter/UniversalUnitConverter'
+import TimeConversionFactors from '../../../measurements/unitsConverter/conversionStrategy/timeConversionFactors'
 
 describe('BreakdownTimeUnits', () => {
-  const timeUnitConverter = new TimeUnitConverter()
+  const timeUnitConverter = new UniversalUnitConverter(TimeConversionFactors)
   const breakdownUnits = new BreakdownUnitsImpl(MeasurementType.time)
-
-  describe('getNextUnit', () => {
-    it('should return the next time unit correctly', () => {
-      expect(breakdownUnits['getNextUnit'](Unit.millisecond)).toBe(Unit.second)
-      expect(breakdownUnits['getNextUnit'](Unit.second)).toBe(Unit.minute)
-      expect(breakdownUnits['getNextUnit'](Unit.minute)).toBe(Unit.hour)
-      expect(breakdownUnits['getNextUnit'](Unit.hour)).toBe(Unit.day)
-      expect(breakdownUnits['getNextUnit'](Unit.day)).toBe(Unit.week)
-      expect(breakdownUnits['getNextUnit'](Unit.week)).toBe(Unit.month)
-      expect(breakdownUnits['getNextUnit'](Unit.month)).toBe(Unit.year)
-      expect(breakdownUnits['getNextUnit'](Unit.year)).toBe(Unit.decade)
-      expect(breakdownUnits['getNextUnit'](Unit.decade)).toBe(Unit.century)
-      expect(breakdownUnits['getNextUnit'](Unit.century)).toBe(Unit.millennium)
-      expect(breakdownUnits['getNextUnit'](Unit.millennium)).toBe(Unit.millennium)
-    })
-  })
-
-  describe('getPreviousUnit', () => {
-    it('should return the previous time unit correctly', () => {
-      expect(breakdownUnits['getPreviousUnit'](Unit.millennium)).toBe(Unit.century)
-      expect(breakdownUnits['getPreviousUnit'](Unit.century)).toBe(Unit.decade)
-      expect(breakdownUnits['getPreviousUnit'](Unit.decade)).toBe(Unit.year)
-      expect(breakdownUnits['getPreviousUnit'](Unit.year)).toBe(Unit.month)
-      expect(breakdownUnits['getPreviousUnit'](Unit.month)).toBe(Unit.week)
-      expect(breakdownUnits['getPreviousUnit'](Unit.week)).toBe(Unit.day)
-      expect(breakdownUnits['getPreviousUnit'](Unit.day)).toBe(Unit.hour)
-      expect(breakdownUnits['getPreviousUnit'](Unit.hour)).toBe(Unit.minute)
-      expect(breakdownUnits['getPreviousUnit'](Unit.minute)).toBe(Unit.second)
-      expect(breakdownUnits['getPreviousUnit'](Unit.second)).toBe(Unit.millisecond)
-      expect(breakdownUnits['getPreviousUnit'](Unit.millisecond)).toBe(Unit.millisecond)
-    })
-
-    describe('all previous and next units for international and imperial standards are the same', () => {
-      const breakdownUnitsInternational = new BreakdownUnitsImpl(MeasurementType.time, MeasurementStandard.international)
-      const breakdownUnitsImperial = new BreakdownUnitsImpl(MeasurementType.time, MeasurementStandard.imperial)
-
-      it('getPreviousUnit', () => {
-        expect(breakdownUnitsInternational['getPreviousUnit'](Unit.millennium)).toBe(breakdownUnitsImperial['getPreviousUnit'](Unit.millennium))
-        expect(breakdownUnitsInternational['getPreviousUnit'](Unit.century)).toBe(breakdownUnitsImperial['getPreviousUnit'](Unit.century))
-        expect(breakdownUnitsInternational['getPreviousUnit'](Unit.decade)).toBe(breakdownUnitsImperial['getPreviousUnit'](Unit.decade))
-        expect(breakdownUnitsInternational['getPreviousUnit'](Unit.year)).toBe(breakdownUnitsImperial['getPreviousUnit'](Unit.year))
-        expect(breakdownUnitsInternational['getPreviousUnit'](Unit.month)).toBe(breakdownUnitsImperial['getPreviousUnit'](Unit.month))
-        expect(breakdownUnitsInternational['getPreviousUnit'](Unit.week)).toBe(breakdownUnitsImperial['getPreviousUnit'](Unit.week))
-        expect(breakdownUnitsInternational['getPreviousUnit'](Unit.day)).toBe(breakdownUnitsImperial['getPreviousUnit'](Unit.day))
-        expect(breakdownUnitsInternational['getPreviousUnit'](Unit.hour)).toBe(breakdownUnitsImperial['getPreviousUnit'](Unit.hour))
-        expect(breakdownUnitsInternational['getPreviousUnit'](Unit.minute)).toBe(breakdownUnitsImperial['getPreviousUnit'](Unit.minute))
-        expect(breakdownUnitsInternational['getPreviousUnit'](Unit.second)).toBe(breakdownUnitsImperial['getPreviousUnit'](Unit.second))
-        expect(breakdownUnitsInternational['getPreviousUnit'](Unit.millisecond)).toBe(breakdownUnitsImperial['getPreviousUnit'](Unit.millisecond))
-      })
-
-      it('getPreviousUnit', () => {
-        expect(breakdownUnitsInternational['getNextUnit'](Unit.millennium)).toBe(breakdownUnitsImperial['getNextUnit'](Unit.millennium))
-        expect(breakdownUnitsInternational['getNextUnit'](Unit.century)).toBe(breakdownUnitsImperial['getNextUnit'](Unit.century))
-        expect(breakdownUnitsInternational['getNextUnit'](Unit.decade)).toBe(breakdownUnitsImperial['getNextUnit'](Unit.decade))
-        expect(breakdownUnitsInternational['getNextUnit'](Unit.year)).toBe(breakdownUnitsImperial['getNextUnit'](Unit.year))
-        expect(breakdownUnitsInternational['getNextUnit'](Unit.month)).toBe(breakdownUnitsImperial['getNextUnit'](Unit.month))
-        expect(breakdownUnitsInternational['getNextUnit'](Unit.week)).toBe(breakdownUnitsImperial['getNextUnit'](Unit.week))
-        expect(breakdownUnitsInternational['getNextUnit'](Unit.day)).toBe(breakdownUnitsImperial['getNextUnit'](Unit.day))
-        expect(breakdownUnitsInternational['getNextUnit'](Unit.hour)).toBe(breakdownUnitsImperial['getNextUnit'](Unit.hour))
-        expect(breakdownUnitsInternational['getNextUnit'](Unit.minute)).toBe(breakdownUnitsImperial['getNextUnit'](Unit.minute))
-        expect(breakdownUnitsInternational['getNextUnit'](Unit.second)).toBe(breakdownUnitsImperial['getNextUnit'](Unit.second))
-        expect(breakdownUnitsInternational['getNextUnit'](Unit.millisecond)).toBe(breakdownUnitsImperial['getNextUnit'](Unit.millisecond))
-      })
-    })
-  })
 
   describe('getAppropriateMeasurementForNextUnit', () => {
     it('should return the same measurement no next unit exists', () => {

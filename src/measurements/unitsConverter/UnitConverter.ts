@@ -1,7 +1,9 @@
 import MeasurementType from '../config/types'
 import { Measurement } from '../units/units'
+import ConversionFactor from './conversionStrategy/conversionFactor'
 
 export default interface UnitConverter<T extends MeasurementType> {
-  getUnitType(): T
+  getMeasurementType(): T
+  getConversionFactor(): ConversionFactor<T>['conversionFactors']
   getUnitConvertedValue(conversionMeasurement: Measurement<T>, convertUnit: Measurement<T>['unit']): Measurement<T>
 }
