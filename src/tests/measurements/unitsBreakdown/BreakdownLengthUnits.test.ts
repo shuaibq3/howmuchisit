@@ -2,7 +2,7 @@ import BreakdownUnitsImpl from '../../../measurements/unitsBreakdown/BreakdownUn
 import { MeasurementStandard, LengthUnits, Unit } from '../../../measurements/units/units'
 import MeasurementType from '../../../measurements/config/types'
 import UniversalUnitConverter from '../../../measurements/unitsConverter/UniversalUnitConverter'
-import LengthConversionFactors from '../../../measurements/unitsConverter/conversionStrategy/lengthConversionFactors'
+import LengthConversionFactors from '../../../measurements/unitsConverter/conversions/lengthConversionFactors'
 
 describe('BreakdownLengthUnits', () => {
   const lengthUnitConverter = new UniversalUnitConverter(LengthConversionFactors)

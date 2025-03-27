@@ -1,5 +1,5 @@
 import MeasurementType from '../config/types'
-import getConversionFactor from '../unitsConverter/conversionStrategy/getConversionFactor'
+import getConversionFactor from '../unitsConverter/conversions/getConversionFactor'
 import ImperialUnits from './imperial'
 import InternationalUnits from './international'
 import { MeasurementStandard, MeasurementUnit } from './units'
@@ -19,7 +19,8 @@ export default class SortedUnitUtils<T extends MeasurementType> {
         ? InternationalUnits[type].includes(conversionFactor.toUnit)
         : ImperialUnits[type].includes(conversionFactor.toUnit))
     return applicableUnits
-      .sort((measurementA, measurementB) => measurementA.multiplicationFactor - measurementB.multiplicationFactor)
+      .sort((measurementA, measurementB) => 
+        (measurementA.conversionFunctions.conversionToGranularUnit(1) as number) - (measurementB.conversionFunctions.conversionToGranularUnit(1) as number))
       .map(measurement => measurement.toUnit as MeasurementUnit<T>)
   }
 

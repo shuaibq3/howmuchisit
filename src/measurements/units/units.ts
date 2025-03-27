@@ -45,11 +45,14 @@ export enum Unit {
   squareInch = 'in²',
   squareYard = 'yd²',
   squareMile = 'mi²',
+  acre = 'acre',
+  hectare = 'hectare',
 
   mmCube = 'mm³',
   cmCube = 'cm³',
   meterCube = 'm³',
   liter = 'liter',
+  milliliter = 'ml',
   cc = 'cc',
 
   cubicFeet = 'ft³',
@@ -119,8 +122,11 @@ export type AreaUnits = Unit.squareMm
   | Unit.squareInch
   | Unit.squareYard
   | Unit.squareMile
+  | Unit.acre
+  | Unit.hectare
   
 export type VolumeUnits = Unit.mmCube
+  | Unit.milliliter
   | Unit.cc
   | Unit.cmCube
   | Unit.meterCube

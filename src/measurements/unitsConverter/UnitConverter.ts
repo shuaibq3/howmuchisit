@@ -1,6 +1,6 @@
 import MeasurementType from '../config/types'
 import { Measurement } from '../units/units'
-import ConversionFactor from './conversionStrategy/conversionFactor'
+import ConversionFactor from './conversions/conversionFactor'
 
 export default interface UnitConverter<T extends MeasurementType> {
   getMeasurementType(): T

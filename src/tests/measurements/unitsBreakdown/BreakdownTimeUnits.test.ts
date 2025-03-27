@@ -2,7 +2,7 @@ import BreakdownUnitsImpl from '../../../measurements/unitsBreakdown/BreakdownUn
 import { TimeUnits, Unit } from '../../../measurements/units/units'
 import MeasurementType from '../../../measurements/config/types'
 import UniversalUnitConverter from '../../../measurements/unitsConverter/UniversalUnitConverter'
-import TimeConversionFactors from '../../../measurements/unitsConverter/conversionStrategy/timeConversionFactors'
+import TimeConversionFactors from '../../../measurements/unitsConverter/conversions/timeConversionFactors'
 
 describe('BreakdownTimeUnits', () => {
   const timeUnitConverter = new UniversalUnitConverter(TimeConversionFactors)

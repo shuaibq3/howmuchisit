@@ -1,8 +1,7 @@
 import GenericError from '../../utils/errors/GenericError'
-import { divide, multiply } from '../../utils/numericalOperations'
 import MeasurementType from '../config/types'
 import { Measurement, MeasurementStandard, MeasurementUnit } from '../units/units'
-import ConversionFactor from './conversionStrategy/conversionFactor'
+import ConversionFactor from './conversions/conversionFactor'
 import UnitConverter from './UnitConverter'
 
 export default class UniversalUnitConverter<T extends MeasurementType> implements UnitConverter<T> {
@@ -22,7 +21,7 @@ export default class UniversalUnitConverter<T extends MeasurementType> implement
     if (!conversionUnitMeasurementFactor || !convertToUnitMeasurementFactor) {
       throw new GenericError('conversionFactorNotDefined', undefined, [conversionMeasurement.unit, ',' ,'or', convertUnit])
     }
-    const convertedToSingleUnit = multiply(conversionMeasurement.value, conversionUnitMeasurementFactor.multiplicationFactor)
-    return { value: divide(convertedToSingleUnit, convertToUnitMeasurementFactor.multiplicationFactor), unit: convertUnit }
+    const convertedToSingleUnit = conversionUnitMeasurementFactor.conversionFunctions.conversionToGranularUnit(conversionMeasurement.value)
+    return { value: convertToUnitMeasurementFactor.conversionFunctions.convertFromGranularUnit(convertedToSingleUnit), unit: convertUnit }
   }
 }

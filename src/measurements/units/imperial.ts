@@ -6,7 +6,7 @@ const ImperialUnits: Record<MeasurementType, MeasurementUnit<MeasurementType>[]>
   [MeasurementType.weight]: [Unit.pound, Unit.ounce],
   [MeasurementType.temperature]: [Unit.degreesFahrenheit],
   [MeasurementType.length]: [Unit.mile, Unit.yard, Unit.foot, Unit.inch],
-  [MeasurementType.area]: [Unit.squareMile, Unit.squareYard, Unit.squareFeet, Unit.squareInch],
+  [MeasurementType.area]: [Unit.squareMile, Unit.squareYard, Unit.squareFeet, Unit.squareInch, Unit.acre],
   [MeasurementType.volume]: [Unit.cubicFeet, Unit.pint, Unit.quart, Unit.gallon, Unit.barrel],
 }
 
