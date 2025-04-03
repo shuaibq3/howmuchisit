@@ -1,4 +1,4 @@
-import GenericError from '../../utils/errors/GenericError'
+import CustomError from '../../utils/errors/CustomError'
 import MeasurementType from '../config/types'
 import { Measurement, MeasurementStandard, MeasurementUnit } from '../units/units'
 import ConversionFactor from './conversions/conversionFactor'
@@ -19,7 +19,7 @@ export default class UniversalUnitConverter<T extends MeasurementType> implement
     const conversionUnitMeasurementFactor = this.getConversionFactor().find(unitConversionFactor => unitConversionFactor.toUnit === conversionMeasurement.unit)
     const convertToUnitMeasurementFactor = this.getConversionFactor().find(unitConversionFactor => unitConversionFactor.toUnit === convertUnit)
     if (!conversionUnitMeasurementFactor || !convertToUnitMeasurementFactor) {
-      throw new GenericError('conversionFactorNotDefined', undefined, [conversionMeasurement.unit, ',' ,'or', convertUnit])
+      throw new CustomError('conversionFactorNotDefined', undefined, [conversionMeasurement.unit, ',' ,'or', convertUnit])
     }
     const convertedToSingleUnit = conversionUnitMeasurementFactor.conversionFunctions.conversionToGranularUnit(conversionMeasurement.value)
     return { value: convertToUnitMeasurementFactor.conversionFunctions.convertFromGranularUnit(convertedToSingleUnit), unit: convertUnit }

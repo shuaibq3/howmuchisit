@@ -2,7 +2,7 @@ import UniversalUnitConverter from '../../../measurements/unitsConverter/Univers
 import Unit, { Measurement, MeasurementStandard, MeasurementUnit, TimeUnits } from '../../../measurements/units/units'
 import MeasurementType from '../../../measurements/config/types'
 import TimeConversionFactors from '../../../measurements/unitsConverter/conversions/timeConversionFactors'
-import GenericError from '../../../utils/errors/GenericError'
+import CustomError from '../../../utils/errors/CustomError'
 import LengthConversionFactors from '../../../measurements/unitsConverter/conversions/lengthConversionFactors'
 import WeightConversionFactors from '../../../measurements/unitsConverter/conversions/weightConversionFactors'
 import AreaConversionFactors from '../../../measurements/unitsConverter/conversions/areaConversionFactors'
@@ -21,7 +21,7 @@ describe('UniversalUnitConverter', () => {
         converter.getUnitConvertedValue(input, targetUnit)
         expect(true).toBe(false)
       } catch (error) {
-        expect(error).toBeInstanceOf(GenericError)
+        expect(error).toBeInstanceOf(CustomError)
       }
     })
 

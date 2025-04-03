@@ -1,4 +1,4 @@
-import GenericError from '../../../utils/errors/GenericError'
+import CustomError from '../../../utils/errors/CustomError'
 import MeasurementType from '../../config/types'
 import AreaConversionFactors from './areaConversionFactors'
 import ConversionFactor from './conversionFactor'
@@ -23,14 +23,14 @@ function getRelevantConversionFactor(measurementType: MeasurementType) {
     case MeasurementType.weight:
       return WeightConversionFactors
     default:
-      throw new GenericError('conversionFactorNotDefined', undefined, [measurementType])
+      throw new CustomError('conversionFactorNotDefined', undefined, [measurementType])
   }
 }
 
 export default function getConversionFactor(measurementType: MeasurementType): ConversionFactor<MeasurementType> {
   const conversionFactor = getRelevantConversionFactor(measurementType)
   if (Object.keys(conversionFactor).length === 0) {
-    throw new GenericError('conversionFactorNotDefined', undefined, ['Must contain at least one unit definition'])
+    throw new CustomError('conversionFactorNotDefined', undefined, ['Must contain at least one unit definition'])
   }
   return conversionFactor
 }

@@ -1,5 +1,5 @@
 import Decimal from 'decimal.js'
-import GenericError from '../../utils/errors/GenericError'
+import CustomError from '../../utils/errors/CustomError'
 import { getIntegerAndDecimalSeparatedValue, getNumericValue, isInteger, isLargeNumber } from '../../utils/numberUtils'
 
 describe('getNumberValue', () => {
@@ -17,8 +17,8 @@ describe('getNumberValue', () => {
   })
 
   it('should throw an error for an invalid number string', () => {
-    expect(() => getNumericValue('abc')).toThrow(new GenericError('notInt'))
-    expect(() => getNumericValue('123abc')).toThrow(new GenericError('notInt'))
+    expect(() => getNumericValue('abc')).toThrow(new CustomError('notInt'))
+    expect(() => getNumericValue('123abc')).toThrow(new CustomError('notInt'))
   })
 })
 

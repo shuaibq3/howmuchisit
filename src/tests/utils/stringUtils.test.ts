@@ -1,7 +1,7 @@
 import { isNumber } from '../../utils/stringUtils'
 import { convertToPlural } from '../../utils/stringUtils'
 import Unit from '../../measurements/units/units'
-import GenericError from '../../utils/errors/GenericError'
+import CustomError from '../../utils/errors/CustomError'
 import Decimal from 'decimal.js'
 
 describe('isNumber', () => {
@@ -68,6 +68,6 @@ describe('convertToPlural', () => {
   })
 
   it('should return the same unit if it does not match any case', () => {
-    expect(() => convertToPlural('unknownUnit' as Unit)).toThrow(new GenericError('invalidUnit'))
+    expect(() => convertToPlural('unknownUnit' as Unit)).toThrow(new CustomError('invalidUnit'))
   })
 })

@@ -1,5 +1,5 @@
 import Unit from '../measurements/units/units'
-import GenericError from './errors/GenericError'
+import CustomError from './errors/CustomError'
 
 export function isNumber(value: string) {
   if (!value) {
@@ -55,6 +55,6 @@ export function convertToPlural(unit: Unit) {
     case Unit.cubicFeet:
       return 'cubic feet'
     default:
-      throw new GenericError('invalidUnit')
+      throw new CustomError('invalidUnit')
   }
 }

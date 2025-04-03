@@ -1,5 +1,5 @@
 import Decimal from 'decimal.js'
-import GenericError from './errors/GenericError'
+import CustomError from './errors/CustomError'
 import { isNumber } from './stringUtils'
 import { toRoundNumber } from './numericalOperations'
 
@@ -15,7 +15,7 @@ export function isInteger(value: NumericValue): boolean {
 
 export function getNumericValue(numString: string): NumericValue {
   if (!isNumber(numString)) {
-    throw new GenericError('notInt')
+    throw new CustomError('notInt')
   }
   const bigNumber = Decimal(numString)
   return bigNumber.greaterThan(Number.MAX_SAFE_INTEGER) || bigNumber.lessThan(Number.MIN_SAFE_INTEGER) ? bigNumber : Number(numString)
