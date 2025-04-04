@@ -1,6 +1,6 @@
-import MeasurementType from '../../../measurements/config/types'
+import { MeasurementType, MeasurementStandard } from '../../../measurements/types'
 import SortedUnitUtils from '../../../measurements/units/SortedUnitUtils'
-import Unit, { MeasurementStandard, LengthUnits } from '../../../measurements/units/units'
+import Unit, { LengthUnits } from '../../../measurements/units/units'
 
 describe('SortedUnitUtils', () => {
   describe('getSortedUnits', () => {

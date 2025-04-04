@@ -1,7 +1,6 @@
-import MeasurementType from '../config/types'
-import { Measurement } from '../units/units'
+import { MeasurementType, Measurement } from '../types'
 import UnitConverter from '../unitsConverter/UnitConverter'
 
 export default interface BreakdownInUnits<T extends MeasurementType> {
-  getUnitsBreakdown(measurementType: Measurement<T>, unitConverter: UnitConverter<T>): Measurement<T>[]
+  getUnitsBreakdown(measurement: Measurement<T>, unitConverter: UnitConverter<T>): Measurement<T>[]
 }

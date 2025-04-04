@@ -1,6 +1,6 @@
 import UniversalUnitConverter from '../../../measurements/unitsConverter/UniversalUnitConverter'
-import Unit, { Measurement, MeasurementStandard, MeasurementUnit, TimeUnits } from '../../../measurements/units/units'
-import MeasurementType from '../../../measurements/config/types'
+import Unit, { MeasurementUnit, TimeUnits } from '../../../measurements/units/units'
+import { Measurement, MeasurementType } from '../../../measurements/types'
 import TimeConversionFactors from '../../../measurements/unitsConverter/conversions/timeConversionFactors'
 import CustomError from '../../../utils/errors/CustomError'
 import LengthConversionFactors from '../../../measurements/unitsConverter/conversions/lengthConversionFactors'
@@ -86,7 +86,7 @@ describe('UniversalUnitConverter', () => {
   })
 
   describe('Length conversion', () => {
-    const converter = new UniversalUnitConverter(LengthConversionFactors, MeasurementStandard.international)
+    const converter = new UniversalUnitConverter(LengthConversionFactors)
 
     it('should convert a value from one unit to another', () => {
       const input: Measurement<MeasurementType.length> = { value: 1, unit: Unit.centimeter }
@@ -136,7 +136,7 @@ describe('UniversalUnitConverter', () => {
   })
 
   describe('Weight conversion', () => {
-    const converter = new UniversalUnitConverter(WeightConversionFactors, MeasurementStandard.international)
+    const converter = new UniversalUnitConverter(WeightConversionFactors)
 
     it('should convert a value from one unit to another', () => {
       const input: Measurement<MeasurementType.weight> = { value: 1, unit: Unit.kilogram }

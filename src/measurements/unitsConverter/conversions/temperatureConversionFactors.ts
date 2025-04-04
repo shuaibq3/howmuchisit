@@ -1,4 +1,4 @@
-import MeasurementType from '../../config/types'
+import { MeasurementType } from '../../types'
 import Unit from '../../units/units'
 import ConversionFactor from './conversionFactor'
 import CtoKConversionStrategy from './conversionStrategies/CtoKConversionStrategy'

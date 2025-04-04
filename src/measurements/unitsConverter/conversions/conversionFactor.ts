@@ -1,4 +1,4 @@
-import MeasurementType from '../../config/types'
+import { MeasurementType } from '../../types'
 import { MeasurementUnit } from '../../units/units'
 import ConversionStrategy from './conversionStrategies/ConversionStrategy'
 

@@ -1,8 +1,8 @@
-import MeasurementType from '../config/types'
+import { MeasurementType, MeasurementStandard } from '../types'
 import getConversionFactor from '../unitsConverter/conversions/getConversionFactor'
 import ImperialUnits from './imperial'
 import InternationalUnits from './international'
-import { MeasurementStandard, MeasurementUnit } from './units'
+import { MeasurementUnit } from './units'
 
 export default class SortedUnitUtils<T extends MeasurementType> {
   private readonly sortedTimeUnits: MeasurementUnit<T>[]

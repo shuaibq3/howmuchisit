@@ -1,5 +1,5 @@
 import CustomError from '../../../utils/errors/CustomError'
-import MeasurementType from '../../config/types'
+import { MeasurementType } from '../../types'
 import AreaConversionFactors from './areaConversionFactors'
 import ConversionFactor from './conversionFactor'
 import LengthConversionFactors from './lengthConversionFactors'

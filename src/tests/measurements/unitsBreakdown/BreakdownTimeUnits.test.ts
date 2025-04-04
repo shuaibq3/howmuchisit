@@ -1,6 +1,6 @@
 import BreakdownUnitsImpl from '../../../measurements/unitsBreakdown/BreakdownUnitsImpl'
 import { TimeUnits, Unit } from '../../../measurements/units/units'
-import MeasurementType from '../../../measurements/config/types'
+import { MeasurementType } from '../../../measurements/types'
 import UniversalUnitConverter from '../../../measurements/unitsConverter/UniversalUnitConverter'
 import TimeConversionFactors from '../../../measurements/unitsConverter/conversions/timeConversionFactors'
 

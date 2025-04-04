@@ -1,4 +1,4 @@
-import MeasurementType from '../config/types'
+import { MeasurementType } from '../types'
 import Unit, { MeasurementUnit, TimeUnitsList } from './units'
 
 const InternationalUnits: Record<MeasurementType, MeasurementUnit<MeasurementType>[]> = {

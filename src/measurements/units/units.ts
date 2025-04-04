@@ -1,5 +1,4 @@
-import { NumericValue } from '../../utils/numberUtils'
-import MeasurementType from '../config/types'
+import { MeasurementType } from '../types'
 
 export enum Unit {
   millennium = 'millennium',
@@ -60,11 +59,6 @@ export enum Unit {
   quart = 'quart', 
   gallon = 'gallon',
   barrel = 'barrel',
-}
-
-export enum MeasurementStandard {
-  international = 'international',
-  imperial = 'imperial',
 }
 
 export type TimeUnits = Unit.millennium
@@ -145,7 +139,5 @@ export type MeasurementUnit<T extends MeasurementType> =
   T extends MeasurementType.area ? AreaUnits :
   T extends MeasurementType.volume ? VolumeUnits :
   never
-
-export type Measurement<T extends MeasurementType> = { value: NumericValue, unit: MeasurementUnit<T> }
 
 export default Unit

@@ -1,8 +1,8 @@
 import { getIntegerAndDecimalSeparatedValue, NumericValue } from '../../utils/numberUtils'
 import { isEqual, isGreaterThan } from '../../utils/numericalOperations'
-import MeasurementType from '../config/types'
+import { MeasurementType, Measurement } from '../types'
 import SortedUnitUtils from '../units/SortedUnitUtils'
-import { Measurement, MeasurementStandard } from '../units/units'
+import { MeasurementStandard } from '../types'
 import UnitConverter from '../unitsConverter/UnitConverter'
 import BreakdownInUnits from './BreakdownInUnits'
 

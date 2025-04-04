@@ -1,6 +1,6 @@
 import BreakdownUnitsImpl from '../../../measurements/unitsBreakdown/BreakdownUnitsImpl'
-import { MeasurementStandard, LengthUnits, Unit } from '../../../measurements/units/units'
-import MeasurementType from '../../../measurements/config/types'
+import { LengthUnits, Unit } from '../../../measurements/units/units'
+import { MeasurementType, MeasurementStandard } from '../../../measurements/types'
 import UniversalUnitConverter from '../../../measurements/unitsConverter/UniversalUnitConverter'
 import LengthConversionFactors from '../../../measurements/unitsConverter/conversions/lengthConversionFactors'
 
