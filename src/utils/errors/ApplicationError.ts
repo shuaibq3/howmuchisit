@@ -3,6 +3,7 @@ const ApplicationErrors = {
   'invalidUnit': { message: 'Invalid unit', numericCode: 501 },
   'conversionFactorNotDefined': { message: 'Conversion factor not defined', numericCode: 502 },
   'languageModuleNotDefined': { message: 'Language not defined', numericCode: 600 },
+  'storageError': { message: 'Language not defined', numericCode: 700 },
 } as const
 
 export type ErrorCode = keyof typeof ApplicationErrors;

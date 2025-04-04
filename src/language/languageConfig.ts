@@ -1,10 +1,12 @@
 export type Language = 'en' | 'bn'
 
+type LanguageDefinition = {
+  languageCode: Language
+  languageName: string
+}
+
 type LanguageConfig = {
-  config: {
-    languageCode: Language
-    languageName: string
-  }
+  config: LanguageDefinition
   constants: Record<string, Record<string, string>>
 }
 

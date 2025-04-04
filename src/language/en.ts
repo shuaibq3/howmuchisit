@@ -15,6 +15,8 @@ const EnglishConfig: LanguageConfig = {
       millionButtonText: 'x Million',
       billionButtonText: 'x Billion',
       trillionButtonText: 'x Trillion',
+      lakhText: 'x Lakh (100 Thousand)',
+      croreText: 'x Crore (10 Million)',
     }
   }
 }

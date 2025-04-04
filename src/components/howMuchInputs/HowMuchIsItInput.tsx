@@ -12,6 +12,8 @@ const HowMuchIsItInput: React.FC = () => {
   const { inputValue, errorMessage, handleChange, clearInputField, multiplyAndAppendToInputValue } = useHowMuchInputHook(howMuchIsItInput.negativeNumberError)
   const { onClick } = useHowMuchSubmitButtonHook()
 
+  const isDisabled = useMemo(() => !inputValue.length || !!errorMessage, [inputValue, errorMessage])
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <Input 
@@ -21,21 +23,22 @@ const HowMuchIsItInput: React.FC = () => {
         value={inputValue} 
         handleChange={handleChange}
       />
-      { isBangla ? 
-        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px', marginBottom: '10px' }}>
-          <Button label="হাজার" onClick={() => multiplyAndAppendToInputValue(1000)} disabled={!inputValue.length || !!errorMessage} />
-          <Button label="লক্ষ" onClick={() => multiplyAndAppendToInputValue(1_00_000)} disabled={!inputValue.length || !!errorMessage} />
-          <Button label="কোটি" onClick={() => multiplyAndAppendToInputValue(1_00_00_000)} disabled={!inputValue.length || !!errorMessage} />
+      {<div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px', marginBottom: '10px'  }}>
+        <Button label={howMuchIsItInput.thousandButtonText} onClick={() => multiplyAndAppendToInputValue(1000)} disabled={isDisabled} />
+        { !isBangla ? <>
+          <Button label={howMuchIsItInput.millionButtonText} onClick={() => multiplyAndAppendToInputValue(1_000_000)} disabled={isDisabled} />
+          <Button label={howMuchIsItInput.billionButtonText} onClick={() => multiplyAndAppendToInputValue(1_000_000_000)} disabled={isDisabled} />
+          <Button label={howMuchIsItInput.trillionButtonText} onClick={() => multiplyAndAppendToInputValue(1_000_000_000_000)} disabled={isDisabled} />
+        </> : <>
+          <Button label={howMuchIsItInput.lakhText} onClick={() => multiplyAndAppendToInputValue(1_000_000)} disabled={isDisabled} />
+          <Button label={howMuchIsItInput.croreText} onClick={() => multiplyAndAppendToInputValue(1_000_000_000)} disabled={isDisabled} />
+        </> }
+        <div style={{ marginLeft: '10px' }}>
+          <Button label={howMuchIsItInput.clearButtonText} onClick={clearInputField} disabled={isDisabled} />
         </div>
-        : <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px', marginBottom: '10px'  }}>
-          <Button label={howMuchIsItInput.thousandButtonText} onClick={() => multiplyAndAppendToInputValue(1000)} disabled={!inputValue.length || !!errorMessage} />
-          <Button label={howMuchIsItInput.millionButtonText} onClick={() => multiplyAndAppendToInputValue(1_000_000)} disabled={!inputValue.length || !!errorMessage} />
-          <Button label={howMuchIsItInput.billionButtonText} onClick={() => multiplyAndAppendToInputValue(1_000_000_000)} disabled={!inputValue.length || !!errorMessage} />
-          <Button label={howMuchIsItInput.trillionButtonText} onClick={() => multiplyAndAppendToInputValue(1_000_000_000_000)} disabled={!inputValue.length || !!errorMessage} />
-        </div> }
-      <Button label={howMuchIsItInput.clearButtonText} onClick={clearInputField} disabled={!inputValue.length || !!errorMessage} />
+      </div> }
 
-      <Button label={howMuchIsItInput.submitButtonText} onClick={onClick} disabled={!inputValue.length || !!errorMessage} />
+      <Button label={howMuchIsItInput.submitButtonText} onClick={onClick} disabled={isDisabled} />
     </div>
   )
 }
