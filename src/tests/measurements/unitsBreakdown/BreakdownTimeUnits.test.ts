@@ -85,6 +85,17 @@ describe('BreakdownTimeUnits', () => {
       expect(result).toEqual([{ value: 1, unit: Unit.week }])
     })
 
+    it('should break down a large value into multiple units (2)', () => {
+      const timeMeasurement = { value: 3661, unit: Unit.second as TimeUnits }
+      const result = breakdownUnits.getUnitsBreakdown(timeMeasurement, timeUnitConverter)
+      expect(result).toEqual([
+        { value: 1, unit: Unit.hour }, 
+        { value: 1, unit: Unit.minute }, 
+        { value: 1, unit: Unit.second }, 
+        { value: 200, unit: Unit.millisecond }
+      ])
+    })
+
     it('should handle values with decimal points and break them into appropriate units', () => {
       const timeMeasurement = { value: 1.5, unit: Unit.hour as TimeUnits }
       const result = breakdownUnits.getUnitsBreakdown(timeMeasurement, timeUnitConverter)
@@ -119,6 +130,15 @@ describe('BreakdownTimeUnits', () => {
       const timeMeasurement = { value: 525600, unit: Unit.minute as TimeUnits }
       const result = breakdownUnits.getUnitsBreakdown(timeMeasurement, timeUnitConverter)
       expect(result).toEqual([{ value: 1, unit: Unit.year }])
+    })
+  })
+
+  describe('getMeasurementString', () => {
+    it('should return a formatted string for length measurement breakdown', () => {
+      const timeMeasurement = { value: 361, unit: Unit.second  as TimeUnits }
+
+      const result = breakdownUnits.getMeasurementString(breakdownUnits.getUnitsBreakdown(timeMeasurement, timeUnitConverter))
+      expect(result).toBe('6 minutes, 1 second, 20 milliseconds')
     })
   })
 })

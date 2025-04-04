@@ -126,6 +126,15 @@ describe('BreakdownLengthUnits', () => {
       expect(result).toEqual([{ value: 2, unit: Unit.lightyear }, { value: 4730500000000, unit: Unit.kilometer }])
     })
   })
+
+  describe('getMeasurementString', () => {
+    it('should return a formatted string for time measurement breakdown', () => {
+      const lengthMeasurement = { value: 150, unit: Unit.centimeter as LengthUnits }
+  
+      const result = breakdownUnits.getMeasurementString(breakdownUnits.getUnitsBreakdown(lengthMeasurement, lengthUnitConverter))
+      expect(result).toBe('1 meter, 50 centimeters')
+    })
+  })
 })
 
   

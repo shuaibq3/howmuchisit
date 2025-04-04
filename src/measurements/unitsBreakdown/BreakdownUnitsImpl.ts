@@ -5,6 +5,7 @@ import SortedUnitUtils from '../units/SortedUnitUtils'
 import { MeasurementStandard } from '../types'
 import UnitConverter from '../unitsConverter/UnitConverter'
 import BreakdownInUnits from './BreakdownInUnits'
+import { convertToPlural } from '../units/unitUtils'
 
 export default class BreakdownUnitsImpl<T extends MeasurementType> implements BreakdownInUnits<T> {
   private readonly sortedUnitUtils: SortedUnitUtils<T>
@@ -74,24 +75,9 @@ export default class BreakdownUnitsImpl<T extends MeasurementType> implements Br
     return this.getUnitsBreakdown(decimalPointMeasurement, unitConverter, intPartMeasurementAppendedArray)
   }
 
-   
-  // getHumanReadableString(_measurements: TimeMeasurement[]): string[] {
-  //   return []
-  //   // const humanUnderstandableTimeMeasurement = this.getHumanReadableMeasurement(conversionMeasurement, timeUnitConverter)
-  //   // if (humanUnderstandableTimeMeasurement.unit === conversionMeasurement.unit) {
-  //   //   return this.constructHumanReadableMessage(conversionMeasurement, messageString)
-  //   // }
-
-  //   // const intAndDecimal = getIntegerAndDecimalSeparatedValue(humanUnderstandableTimeMeasurement.value)
-  //   // if (!intAndDecimal[1]) {
-  //   //   return this.constructHumanReadableMessage({ ...humanUnderstandableTimeMeasurement, value: intAndDecimal[0] }, messageString)
-  //   // }
-  
-  //   // return this.getHumanReadableString(humanUnderstandableTimeMeasurement, timeUnitConverter, messageString)
-  // }
-
-  // private constructHumanReadableMessage(conversionMeasurement: TimeMeasurement, messageString: string[] = []): string[] {
-  //   const unitString = isGreaterThan(conversionMeasurement.value, 1) ? convertToPlural(conversionMeasurement.unit) : conversionMeasurement.unit
-  //   return [...messageString, `${conversionMeasurement.value} ${unitString}`]
-  // }
+  getMeasurementString(measurementUnitBreakdown: Measurement<T>[]): string {
+    return measurementUnitBreakdown
+      .map(breakdown => `${breakdown.value} ${isGreaterThan(breakdown.value, 1) ? convertToPlural(breakdown.unit) : breakdown.unit}`)
+      .join(', ')
+  }
 }
