@@ -18,6 +18,7 @@ const Input = ({ value = '', errorMessage, handleChange, inputType, placeholderT
         value={value} 
         onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange?.(event.target.value)}
         placeholder={placeholderText}
+        autoFocus
       />
     </div>
   )
