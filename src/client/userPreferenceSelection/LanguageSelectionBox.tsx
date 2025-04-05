@@ -10,7 +10,7 @@ type LanguageSelectionBoxProps = {
 
 const LanguageSelectionBox = ({ saveLanguagePreference }: LanguageSelectionBoxProps) => {
   const supportedLanguageList = getLanguageConfigList()
-  const { languageConfig: { config: { languageCode } } } = useContext(LanguageContext)
+  const { languageConfig: { config: { languageCode }, constants } } = useContext(LanguageContext)
   
   const onItemSelected = (selectedOptionId: string) => {
     const selectedLanguage = supportedLanguageList.find(language => language.config.languageCode === selectedOptionId)
@@ -20,14 +20,17 @@ const LanguageSelectionBox = ({ saveLanguagePreference }: LanguageSelectionBoxPr
   }
 
   return (
-    <DropDown
-      options={supportedLanguageList.map(language => ({
-        id: language.config.languageCode,
-        text: language.config.languageName,
-        selected: language.config.languageCode === languageCode,
-      }))}
-      onSelected={onItemSelected}
-    />
+    <div style={{ display: 'flex', marginBottom: '10px' }}>
+      <span style={{ marginRight: '10px' }}>{constants.userPreferenceSelection.language}</span>
+      <DropDown
+        options={supportedLanguageList.map(language => ({
+          id: language.config.languageCode,
+          text: language.config.languageName,
+          selected: language.config.languageCode === languageCode,
+        }))}
+        onSelected={onItemSelected}
+      />
+    </div>
   )
 }
 

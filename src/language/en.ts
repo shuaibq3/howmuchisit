@@ -1,3 +1,5 @@
+import { MeasurementStandard } from '../measurements/types'
+import Unit from '../measurements/units/units'
 import LanguageConfig from './languageConfig'
 
 const EnglishConfig: LanguageConfig = {
@@ -6,6 +8,12 @@ const EnglishConfig: LanguageConfig = {
     languageName: 'English',
   },
   constants: {
+    unitStandards: MeasurementStandard,
+    units: Unit,
+    userPreferenceSelection: {
+      language: 'Language',
+      unitStandard: 'Unit Standard',
+    },
     howMuchIsItInput: {
       hintText: 'How much is it?',
       negativeNumberError: 'Enter a positive number',
