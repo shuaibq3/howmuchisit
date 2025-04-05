@@ -1,3 +1,4 @@
+import CustomError from '../../utils/errors/CustomError'
 import { Unit } from './units'
 
 export function getUnitShortForm(unit: Unit): string {
@@ -68,4 +69,59 @@ export function convertToPlural(unit: Unit) {
       return `${unit}s`
     }
   }
+}
+
+export function convertToAreaOrVolume(...paramUnits: Unit[]): Unit {
+  if (paramUnits.every(unit => paramUnits[0] !== unit)) {
+    throw new CustomError('conversionErrorForDifferentMeasurementTypes')
+  }
+
+  if (paramUnits.length === 1) {
+    return paramUnits[0]
+  }
+
+  if (paramUnits.length == 2) {
+    switch (paramUnits[0]) {
+      case Unit.millimeter:
+        return Unit.squareMm
+      case Unit.centimeter:
+        return Unit.squareCm
+      case Unit.meter:
+        return Unit.squareMeter
+      case Unit.kilometer:
+        return Unit.squareKm
+      case Unit.foot:
+        return Unit.squareFeet
+      case Unit.inch:
+        return Unit.squareInch
+      case Unit.mile:
+        return Unit.squareMile
+      case Unit.acre:
+      case Unit.hectare:
+        return paramUnits[0]
+    }
+  }
+
+  if (paramUnits.length == 3) {
+    switch (paramUnits[0]) {
+      case Unit.millimeter:
+        return Unit.mmCube
+      case Unit.centimeter:
+        return Unit.cmCube
+      case Unit.meter:
+        return Unit.meterCube
+      case Unit.foot:
+        return Unit.cubicFeet
+      case Unit.liter:
+      case Unit.milliliter:
+      case Unit.cc:
+      case Unit.pint:
+      case Unit.quart:
+      case Unit.gallon:
+      case Unit.barrel:
+        return paramUnits[0]
+    }
+  }
+
+  return paramUnits[0]
 }

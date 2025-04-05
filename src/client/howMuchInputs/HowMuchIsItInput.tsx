@@ -3,9 +3,11 @@ import Input from '../components/Input'
 import Button from '../components/Button'
 import useHowMuchInputHook from './useHowMuchInput'
 import LanguageContext from '../contexts/LanguageContext'
+import { BDT1000 } from '../../measurements/subjects/currency/BDT'
+import Currency from '../../measurements/subjects/currency/currency'
 
 type HowMuchIsItInputProps = {
-  onSubmit: (value: string) => void
+  onSubmit: (value: string, measurementContext: Currency) => void
 }
 
 const HowMuchIsItInput = ({ onSubmit }: HowMuchIsItInputProps) => {
@@ -32,15 +34,15 @@ const HowMuchIsItInput = ({ onSubmit }: HowMuchIsItInputProps) => {
           <Button label={howMuchIsItInput.billionButtonText} onClick={() => multiplyAndAppendToInputValue(1_000_000_000)} disabled={isDisabled} />
           <Button label={howMuchIsItInput.trillionButtonText} onClick={() => multiplyAndAppendToInputValue(1_000_000_000_000)} disabled={isDisabled} />
         </> : <>
-          <Button label={howMuchIsItInput.lakhText} onClick={() => multiplyAndAppendToInputValue(1_000_000)} disabled={isDisabled} />
-          <Button label={howMuchIsItInput.croreText} onClick={() => multiplyAndAppendToInputValue(1_000_000_000)} disabled={isDisabled} />
+          <Button label={howMuchIsItInput.lakhText} onClick={() => multiplyAndAppendToInputValue(1_00_000)} disabled={isDisabled} />
+          <Button label={howMuchIsItInput.croreText} onClick={() => multiplyAndAppendToInputValue(100_00_000)} disabled={isDisabled} />
         </> }
         <div style={{ marginLeft: '10px' }}>
           <Button label={howMuchIsItInput.clearButtonText} onClick={clearInputField} disabled={isDisabled} />
         </div>
       </div> }
 
-      <Button label={howMuchIsItInput.submitButtonText} onClick={() => onSubmit(inputValue)} disabled={isDisabled} />
+      <Button label={howMuchIsItInput.submitButtonText} onClick={() => onSubmit(inputValue, BDT1000)} disabled={isDisabled} />
     </div>
   )
 }

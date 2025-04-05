@@ -1,6 +1,6 @@
 import { MeasurementStandard, MeasurementType } from '../measurements/types'
 import { Measurement } from '../measurements/types'
-import BreakdownUnitsImpl from '../measurements/unitsBreakdown/BreakdownToAppropriateUnits'
+import BreakdownToAppropriateUnits from '../measurements/unitsBreakdown/BreakdownToAppropriateUnits'
 import UniversalUnitConverter from '../measurements/unitsConverter/UniversalUnitConverter'
 import MeasurementUseCase from './MeasurementUseCase'
 import MeasurementSubject from '../measurements/subjects/measurementSubject'
@@ -16,7 +16,7 @@ export default class UniversalMeasurementUseCase<T extends MeasurementType[]> im
   // useCaseWiseMeasurement contains all the measurementTypes defined in measurementContext.supportedUseCases. enforced through ts compiler
   getMeasurementMatrix(useCaseWiseMeasurement: Record<T[number], Measurement<T[number]>>, supportedUnitStandard?: MeasurementStandard): Record<T[number], Measurement<T[number]>[]> {
     return this.measurementContext.supportedUseCases.reduce((useCaseWiseMeasurementBreakdown, measurementType) => {
-      const unitsBreakdown = new BreakdownUnitsImpl(measurementType, supportedUnitStandard)
+      const unitsBreakdown = new BreakdownToAppropriateUnits(measurementType, supportedUnitStandard)
       const unitConverter = new UniversalUnitConverter(getConversionFactor(measurementType))
       const measurement = useCaseWiseMeasurement[measurementType as keyof typeof useCaseWiseMeasurement]
       return { 

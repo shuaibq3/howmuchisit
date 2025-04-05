@@ -2,10 +2,10 @@ import { MeasurementType } from '../../types'
 import { Measurement } from '../../types'
 import MeasurementSubject from '../measurementSubject'
 
-type Currency = MeasurementSubject<[MeasurementType.length, MeasurementType.area, MeasurementType.volume, MeasurementType.weight]> & {
+type Currency = MeasurementSubject<[MeasurementType.length, MeasurementType.area, MeasurementType.volume, MeasurementType.weight, MeasurementType.time]> & {
   note: string
   value: number
-  height: Measurement<MeasurementType.length>
+  length: Measurement<MeasurementType.length>
   width: Measurement<MeasurementType.length>
   thickness: Measurement<MeasurementType.length>
   weight: Measurement<MeasurementType.weight>
@@ -13,7 +13,7 @@ type Currency = MeasurementSubject<[MeasurementType.length, MeasurementType.area
 
 export const CurrencyCommon: Pick<Currency, 'supportedUseCases' | 'type'> = {
   type: 'Currency',
-  supportedUseCases: [MeasurementType.length, MeasurementType.area, MeasurementType.volume, MeasurementType.weight]
+  supportedUseCases: [MeasurementType.length, MeasurementType.area, MeasurementType.volume, MeasurementType.weight, MeasurementType.time]
 }
 
 export default Currency
