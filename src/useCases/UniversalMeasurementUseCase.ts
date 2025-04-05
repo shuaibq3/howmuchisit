@@ -1,6 +1,6 @@
 import { MeasurementStandard, MeasurementType } from '../measurements/types'
 import { Measurement } from '../measurements/types'
-import BreakdownUnitsImpl from '../measurements/unitsBreakdown/BreakdownUnitsImpl'
+import BreakdownUnitsImpl from '../measurements/unitsBreakdown/BreakdownToAppropriateUnits'
 import UniversalUnitConverter from '../measurements/unitsConverter/UniversalUnitConverter'
 import MeasurementUseCase from './MeasurementUseCase'
 import MeasurementSubject from '../measurements/subjects/measurementSubject'

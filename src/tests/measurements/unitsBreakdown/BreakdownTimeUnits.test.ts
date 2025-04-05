@@ -1,4 +1,4 @@
-import BreakdownUnitsImpl from '../../../measurements/unitsBreakdown/BreakdownUnitsImpl'
+import BreakdownUnitsImpl from '../../../measurements/unitsBreakdown/BreakdownToAppropriateUnits'
 import { TimeUnits, Unit } from '../../../measurements/units/units'
 import { MeasurementType } from '../../../measurements/types'
 import UniversalUnitConverter from '../../../measurements/unitsConverter/UniversalUnitConverter'

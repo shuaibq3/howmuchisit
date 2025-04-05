@@ -6,7 +6,7 @@ import { MeasurementStandard } from '../types'
 import UnitConverter from '../unitsConverter/UnitConverter'
 import BreakdownInUnits from './BreakdownInUnits'
 
-export default class BreakdownUnitsImpl<T extends MeasurementType> implements BreakdownInUnits<T> {
+export default class BreakdownToAppropriateUnits<T extends MeasurementType> implements BreakdownInUnits<T> {
   private readonly sortedUnitUtils: SortedUnitUtils<T>
 
   constructor(measurementType: T, measurementStandard?: MeasurementStandard) {
