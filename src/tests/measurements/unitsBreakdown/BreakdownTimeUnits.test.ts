@@ -132,13 +132,4 @@ describe('BreakdownTimeUnits', () => {
       expect(result).toEqual([{ value: 1, unit: Unit.year }])
     })
   })
-
-  describe('getMeasurementString', () => {
-    it('should return a formatted string for length measurement breakdown', () => {
-      const timeMeasurement = { value: 361, unit: Unit.second  as TimeUnits }
-
-      const result = breakdownUnits.getMeasurementString(breakdownUnits.getUnitsBreakdown(timeMeasurement, timeUnitConverter))
-      expect(result).toBe('6 minutes, 1 second, 20 milliseconds')
-    })
-  })
 })

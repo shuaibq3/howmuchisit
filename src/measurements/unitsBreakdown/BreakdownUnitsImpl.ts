@@ -5,7 +5,6 @@ import SortedUnitUtils from '../units/SortedUnitUtils'
 import { MeasurementStandard } from '../types'
 import UnitConverter from '../unitsConverter/UnitConverter'
 import BreakdownInUnits from './BreakdownInUnits'
-import { convertToPlural } from '../units/unitUtils'
 
 export default class BreakdownUnitsImpl<T extends MeasurementType> implements BreakdownInUnits<T> {
   private readonly sortedUnitUtils: SortedUnitUtils<T>
@@ -73,11 +72,5 @@ export default class BreakdownUnitsImpl<T extends MeasurementType> implements Br
     }
 
     return this.getUnitsBreakdown(decimalPointMeasurement, unitConverter, intPartMeasurementAppendedArray)
-  }
-
-  getMeasurementString(measurementUnitBreakdown: Measurement<T>[]): string {
-    return measurementUnitBreakdown
-      .map(breakdown => `${breakdown.value} ${isGreaterThan(breakdown.value, 1) ? convertToPlural(breakdown.unit) : breakdown.unit}`)
-      .join(', ')
   }
 }
