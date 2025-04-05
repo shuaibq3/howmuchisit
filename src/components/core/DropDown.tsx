@@ -1,6 +1,7 @@
 import React from 'react'
 
 type DropdownOption = { id: string, text: string, selected?: boolean }
+
 type DropdownProps = {
   options: DropdownOption[]
   onSelected?: (selectedOption: string) => void

@@ -37,11 +37,17 @@ export function absoluteValue(number: NumericValue): NumericValue {
 }
 
 export function isGreaterThan(numberA: NumericValue, numberB: NumericValue): boolean {
-  return Decimal(numberA).greaterThan(numberB)
+  if (isLargeNumber(numberA) || isLargeNumber(numberB)) {
+    return Decimal(numberA).greaterThan(numberB)
+  }
+  return numberA > numberB
 }
 
 export function isEqual(numberA: NumericValue, numberB: NumericValue): boolean {
-  return Decimal(numberA).equals(numberB)
+  if (isLargeNumber(numberA) || isLargeNumber(numberB)) {
+    return Decimal(numberA).equals(numberB)
+  }
+  return numberA === numberB
 }
 
 export function toRoundNumber(number: NumericValue, precision = 3): NumericValue {
