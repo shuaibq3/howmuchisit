@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import LanguageContext from '../contexts/LanguageContext'
 import { getLanguageConfigList } from '../../language/languageConfigUtils'
-import { DropDown } from '../core/DropDown'
+import { DropDown } from '../components/DropDown'
 import LanguageConfig from '../../language/languageConfig'
 
 type LanguageSelectionBoxProps = {

@@ -1,16 +1,18 @@
 import React, { useContext, useMemo } from 'react'
-import Input from '../core/Input'
-import Button from '../core/Button'
+import Input from '../components/Input'
+import Button from '../components/Button'
 import useHowMuchInputHook from './useHowMuchInput'
-import useHowMuchSubmitButtonHook from './useHowMuchSubmitButton'
 import LanguageContext from '../contexts/LanguageContext'
 
-const HowMuchIsItInput: React.FC = () => {
+type HowMuchIsItInputProps = {
+  onSubmit: (value: string) => void
+}
+
+const HowMuchIsItInput = ({ onSubmit }: HowMuchIsItInputProps) => {
   const { languageConfig: { config, constants: { howMuchIsItInput } } } = useContext(LanguageContext)
   const isBangla = useMemo(() => config.languageCode === 'bn', [config.languageCode])
 
   const { inputValue, errorMessage, handleChange, clearInputField, multiplyAndAppendToInputValue } = useHowMuchInputHook(howMuchIsItInput.negativeNumberError)
-  const { onClick } = useHowMuchSubmitButtonHook()
 
   const isDisabled = useMemo(() => !inputValue.length || !!errorMessage, [inputValue, errorMessage])
 
@@ -38,7 +40,7 @@ const HowMuchIsItInput: React.FC = () => {
         </div>
       </div> }
 
-      <Button label={howMuchIsItInput.submitButtonText} onClick={onClick} disabled={isDisabled} />
+      <Button label={howMuchIsItInput.submitButtonText} onClick={() => onSubmit(inputValue)} disabled={isDisabled} />
     </div>
   )
 }
