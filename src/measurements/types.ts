@@ -13,6 +13,7 @@ export enum MeasurementType {
 export type Measurement<T extends MeasurementType> = { value: NumericValue; unit: MeasurementUnit<T> }
 
 export enum MeasurementStandard {
+  all = 'all',
   international = 'international',
   imperial = 'imperial'
 }

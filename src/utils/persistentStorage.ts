@@ -1,6 +1,6 @@
 import CustomError from './errors/CustomError'
 
-type StorageKey = 'languagePreference'
+type StorageKey = 'languagePreference' | 'unitStandardPreference'
 
 export function storeValue(key: StorageKey, value: string | object): void {
   try {

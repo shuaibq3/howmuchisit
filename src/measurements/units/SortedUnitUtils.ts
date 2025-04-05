@@ -13,7 +13,7 @@ export default class SortedUnitUtils<T extends MeasurementType> {
 
   private getSortedMeasurementUnitsForType(type: T, standard?: MeasurementStandard): MeasurementUnit<T>[] {
     const conversionFactors = getConversionFactor(type)
-    const applicableUnits = !standard 
+    const applicableUnits = (!standard || standard === MeasurementStandard.all) 
       ? conversionFactors.conversionFactors
       : conversionFactors.conversionFactors .filter(conversionFactor => standard === MeasurementStandard.international
         ? InternationalUnits[type].includes(conversionFactor.toUnit)

@@ -24,6 +24,13 @@ describe('SortedUnitUtils', () => {
 
       expect(sortedUnits).toEqual([Unit.millimeter, Unit.centimeter, Unit.inch, Unit.foot, Unit.yard, Unit.meter, Unit.kilometer, Unit.mile, Unit.lightyear])
     })
+
+    it('should return all units sorted if MeasurementStandard.all is provided', () => {
+      const unitSortUtils = new SortedUnitUtils(MeasurementType.length, MeasurementStandard.all)
+      const sortedUnits = unitSortUtils.getSortedUnits()
+
+      expect(sortedUnits).toEqual([Unit.millimeter, Unit.centimeter, Unit.inch, Unit.foot, Unit.yard, Unit.meter, Unit.kilometer, Unit.mile, Unit.lightyear])
+    })
   })
 
   describe('getNextUnit', () => {
