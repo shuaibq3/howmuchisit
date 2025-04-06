@@ -48,11 +48,9 @@ export enum Unit {
   hectare = 'hectare',
 
   mmCube = 'mm³',
-  cmCube = 'cm³',
+  cmCube = 'cc/cm³ or milliliter',
   meterCube = 'm³',
   liter = 'liter',
-  milliliter = 'milliliter',
-  cc = 'cc',
 
   cubicFeet = 'ft³',
   pint = 'pint', 
@@ -120,8 +118,6 @@ export type AreaUnits = Unit.squareMm
   | Unit.hectare
   
 export type VolumeUnits = Unit.mmCube
-  | Unit.milliliter
-  | Unit.cc
   | Unit.cmCube
   | Unit.meterCube
   | Unit.liter

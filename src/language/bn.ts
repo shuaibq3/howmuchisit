@@ -63,8 +63,7 @@ const BanglaConfig: LanguageConfig = {
       cmCube: 'ঘন সেন্টিমিটার',
       meterCube: 'ঘন মিটার',
       liter: 'লিটার',
-      milliliter: 'মিলিলিটার',
-      cc: 'সিসি',
+      cc: 'সিসি/মিলিলিটার',
     
       cubicFeet: 'ঘন ফুট',
       pint: 'পাইন্ট', 

@@ -11,20 +11,12 @@ const VolumeConversionFactors: ConversionFactor<MeasurementType.volume> = {
       conversionFunctions: new UnitValueConversionStrategy()
     },
     { 
-      toUnit: Unit.cc, 
-      conversionFunctions: new MultiplicationFactorConversionStrategy(1000) // 1 cc = 1000 mm³
-    },
-    { 
       toUnit: Unit.cmCube, 
-      conversionFunctions: new MultiplicationFactorConversionStrategy(100) // 1 m³ = 1000 mm³
+      conversionFunctions: new MultiplicationFactorConversionStrategy(1000) // 1 cm³ = 1000 mm³
     },
     { 
       toUnit: Unit.meterCube, 
       conversionFunctions: new MultiplicationFactorConversionStrategy(1e9) // 1 m³ = 1e9 mm³
-    },
-    { 
-      toUnit: Unit.milliliter, 
-      conversionFunctions: new MultiplicationFactorConversionStrategy(1000) // 1 milliliter = 1000 mm³
     },
     { 
       toUnit: Unit.liter, 

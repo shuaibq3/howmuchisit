@@ -240,7 +240,7 @@ describe('UniversalUnitConverter', () => {
   
     it('should convert a value from one unit to another', () => {
       const input: Measurement<MeasurementType.volume> = { value: 1, unit: Unit.liter }
-      const targetUnit: MeasurementUnit<MeasurementType.volume> = Unit.milliliter
+      const targetUnit: MeasurementUnit<MeasurementType.volume> = Unit.cmCube
   
       const result = converter.getUnitConvertedValue(input, targetUnit)
   
@@ -251,14 +251,14 @@ describe('UniversalUnitConverter', () => {
       const conversionFactor = {
         measurementType: MeasurementType.volume,
         conversionFactors: [
-          ...VolumeConversionFactors.conversionFactors.filter(conversion => conversion.toUnit !== Unit.liter && conversion.toUnit !== Unit.milliliter),
+          ...VolumeConversionFactors.conversionFactors.filter(conversion => conversion.toUnit !== Unit.liter && conversion.toUnit !== Unit.cmCube),
           { toUnit: Unit.liter, conversionFunctions: new MultiplicationFactorConversionStrategy(1) },
-          { toUnit: Unit.milliliter, conversionFunctions: new MultiplicationFactorConversionStrategy(1 / 1000) },
+          { toUnit: Unit.cmCube, conversionFunctions: new MultiplicationFactorConversionStrategy(1 / 1000) },
         ],
       }
       const converter = new UniversalUnitConverter(conversionFactor)
   
-      const input: Measurement<MeasurementType.volume> = { value: 1000, unit: Unit.milliliter }
+      const input: Measurement<MeasurementType.volume> = { value: 1000, unit: Unit.cmCube }
       const targetUnit: MeasurementUnit<MeasurementType.volume> = Unit.liter
   
       const result = converter.getUnitConvertedValue(input, targetUnit)
@@ -277,7 +277,7 @@ describe('UniversalUnitConverter', () => {
   
     it('should handle multiple conversion steps correctly', () => {
       const input: Measurement<MeasurementType.volume> = { value: 1, unit: Unit.gallon }
-      const targetUnit: MeasurementUnit<MeasurementType.volume> = Unit.milliliter
+      const targetUnit: MeasurementUnit<MeasurementType.volume> = Unit.cmCube
   
       const result = converter.getUnitConvertedValue(input, targetUnit)
   

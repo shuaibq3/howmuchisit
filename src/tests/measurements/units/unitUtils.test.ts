@@ -23,7 +23,6 @@ describe('unitUtils', () => {
       expect(convertToPlural(Unit.kilogram)).toBe('kilograms')
       expect(convertToPlural(Unit.tonne)).toBe('tons')
       expect(convertToPlural(Unit.liter)).toBe('liters')
-      expect(convertToPlural(Unit.milliliter)).toBe('milliliters')
       expect(convertToPlural(Unit.ounce)).toBe('ounces')
       expect(convertToPlural(Unit.pound)).toBe('pounds')
       expect(convertToPlural(Unit.acre)).toBe('acres')
@@ -49,7 +48,6 @@ describe('unitUtils', () => {
       expect(convertToPlural(Unit.squareInch)).toBe(Unit.squareInch)
       expect(convertToPlural(Unit.squareYard)).toBe(Unit.squareYard)
       expect(convertToPlural(Unit.squareMile)).toBe(Unit.squareMile)
-      expect(convertToPlural(Unit.cc)).toBe(Unit.cc)
       expect(convertToPlural(Unit.cubicFeet)).toBe(Unit.cubicFeet)
       expect(convertToPlural(Unit.cmCube)).toBe(Unit.cmCube)
       expect(convertToPlural(Unit.meterCube)).toBe(Unit.meterCube)
@@ -75,7 +73,6 @@ describe('unitUtils', () => {
       expect(getUnitShortForm(Unit.millimeter)).toBe('mm')
       expect(getUnitShortForm(Unit.foot)).toBe('ft')
       expect(getUnitShortForm(Unit.inch)).toBe('in')
-      expect(getUnitShortForm(Unit.milliliter)).toBe('ml')
     })
 
     it('should return the same unit if no short form is defined', () => {

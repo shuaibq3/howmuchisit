@@ -28,8 +28,6 @@ export function getUnitShortForm(unit: Unit): string {
       return 'ft'
     case Unit.inch:
       return 'in'
-    case Unit.milliliter:
-      return 'ml'
     default:
       return unit
   }
@@ -61,7 +59,6 @@ export function convertToPlural(unit: Unit) {
     case Unit.mmCube:
     case Unit.cmCube:
     case Unit.meterCube:
-    case Unit.cc:
     case Unit.cubicFeet:
       return unit
     default: {
