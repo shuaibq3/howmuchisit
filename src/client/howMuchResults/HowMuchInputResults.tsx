@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { NumericValue } from '../../utils/numberUtils'
-import useResultUseCases from './useResultUseCases'
+import currencyUseCases from '../../useCases/currencyUseCases'
 import Currency from '../../measurements/subjects/currency/currency'
+import UnitStandardContext from '../contexts/UnitStandardContext'
 
 type TimeUseCaseProps = {
   inputValue: NumericValue
@@ -9,7 +10,8 @@ type TimeUseCaseProps = {
 }
 
 const HowMuchInputResults = ({ inputValue, measurementContext }: TimeUseCaseProps) => {
-  const { measurementMatrixString } = useResultUseCases(inputValue, measurementContext)
+  const { unitStandard } = useContext(UnitStandardContext)
+  const { measurementMatrixString } = currencyUseCases(inputValue, measurementContext, unitStandard)
 
   return (
     <div>

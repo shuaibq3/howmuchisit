@@ -4,9 +4,9 @@ import { MeasurementType, Measurement } from '../types'
 import SortedUnitUtils from '../units/SortedUnitUtils'
 import { MeasurementStandard } from '../types'
 import UnitConverter from '../unitsConverter/UnitConverter'
-import BreakdownInUnits from './BreakdownInUnits'
+import BreakdownUnits from './BreakdownUnits'
 
-export default class BreakdownToAppropriateUnits<T extends MeasurementType> implements BreakdownInUnits<T> {
+export default class BreakdownToAppropriateUnits<T extends MeasurementType> implements BreakdownUnits<T> {
   private readonly sortedUnitUtils: SortedUnitUtils<T>
 
   constructor(measurementType: T, measurementStandard?: MeasurementStandard) {

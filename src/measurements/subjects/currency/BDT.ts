@@ -7,7 +7,7 @@ export const BDT1000: Currency = {
   value: 1000,
   length: { unit: Unit.centimeter, value: 16 },
   width: { unit: Unit.centimeter, value: 7 },
-  thickness: { unit: Unit.millimeter, value: 0.1 },
+  thickness: { unit: Unit.centimeter, value: 0.01 },
   weight: { unit: Unit.gram, value: 1 },
 }
 
@@ -17,6 +17,6 @@ export const BDT500: Currency = {
   value: 500,
   length: { unit: Unit.centimeter, value: 15 },
   width: { unit: Unit.centimeter, value: 7 },
-  thickness: { unit: Unit.millimeter, value: 0.1 },
+  thickness: { unit: Unit.centimeter, value: 0.01 },
   weight: { unit: Unit.gram, value: 1 },
 }
