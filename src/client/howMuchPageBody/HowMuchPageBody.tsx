@@ -4,12 +4,12 @@ import useHowMuchSubmitButton from './useHowMuchSubmitButton'
 import HowMuchInputResults from '../howMuchResults/HowMuchInputResults'
 
 const HowMuchBody = () => {
-  const { inputValue, measurementContext, onSubmit } = useHowMuchSubmitButton()
+  const { inputValue, onSubmit } = useHowMuchSubmitButton()
 
   return (
     <div>
       <HowMuchIsItInput onSubmit={onSubmit}/>
-      { inputValue !== 0 && measurementContext && <HowMuchInputResults inputValue={inputValue} measurementContext={measurementContext} /> }
+      { inputValue !== 0 && <HowMuchInputResults inputValue={inputValue} /> }
     </div>
   )
 }

@@ -12,7 +12,7 @@ type Currency = MeasurementSubject<[MeasurementType.length, MeasurementType.area
 }
 
 export const CurrencyCommon: Pick<Currency, 'supportedUseCases' | 'type'> = {
-  type: 'Currency',
+  type: 'currency',
   supportedUseCases: [MeasurementType.length, MeasurementType.area, MeasurementType.volume, MeasurementType.weight, MeasurementType.time]
 }
 

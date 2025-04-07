@@ -5,7 +5,9 @@ import { NumericValue } from '../utils/numberUtils'
 import { divide } from '../utils/numericalOperations'
 import Unit from '../measurements/units/units'
 
-function getMeasurementMultiplicationFactorForType(measurementContext: Currency, measurementType: MeasurementType): Measurement<MeasurementType>[] {
+type CurrencyUseCases = Currency['supportedUseCases']
+
+function getMeasurementMultiplicationFactorForType(measurementContext: Currency, measurementType: CurrencyUseCases[number]): Measurement<CurrencyUseCases[number]>[] {
   if (measurementType === MeasurementType.time) {
     // counting 10 digits per second
     return [{ value: 0.1, unit: Unit.second }]
@@ -28,13 +30,13 @@ function getMeasurementMultiplicationFactorForType(measurementContext: Currency,
   return []
 }
 
-export default function currencyUseCases(inputValue: NumericValue, measurementContext: Currency, unitStandard?: MeasurementStandard) {
-  const universalMeasurementUseCases = new SupportedUseCaseWiseBreakdown(measurementContext)
-  const useCaseMeasurements = measurementContext.supportedUseCases.reduce((acc, measurementType) => ({
+export default function currencyUseCases(inputValue: NumericValue, currencyContext: Currency, unitStandard?: MeasurementStandard) {
+  const useCaseMeasurements = currencyContext.supportedUseCases.reduce((acc, measurementType) => ({
     ...acc, 
-    [measurementType]: getMeasurementMultiplicationFactorForType(measurementContext, measurementType)
-  }), {} as Record<Currency['supportedUseCases'][number], Measurement<MeasurementType>[]>)
+    [measurementType]: getMeasurementMultiplicationFactorForType(currencyContext, measurementType)
+  }), {} as Record<CurrencyUseCases[number], Measurement<CurrencyUseCases[number]>[]>)
 
+  const universalMeasurementUseCases = new SupportedUseCaseWiseBreakdown<CurrencyUseCases>()
   const measurementMatrix = universalMeasurementUseCases.getUseCaseWiseMeasurementBreakdown(inputValue, useCaseMeasurements, unitStandard)
   return { measurementMatrix, measurementMatrixString: universalMeasurementUseCases.getUseCaseWiseBreakdownAsString(measurementMatrix) }
 }

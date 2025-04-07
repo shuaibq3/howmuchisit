@@ -3,7 +3,6 @@ import { Measurement } from '../measurements/types'
 import BreakdownToAppropriateUnits from '../measurements/unitsBreakdown/BreakdownToAppropriateUnits'
 import UniversalUnitConverter from '../measurements/unitsConverter/UniversalUnitConverter'
 import SubjectMeasurementBreakdown from './SubjectMeasurementBreakdown'
-import MeasurementSubject from '../measurements/subjects/measurementSubject'
 import getConversionFactor from '../measurements/unitsConverter/conversions/getConversionFactor'
 import { isGreaterThan, multiply } from '../utils/numericalOperations'
 import { convertToPlural } from '../measurements/units/unitUtils'
@@ -12,11 +11,7 @@ import Unit, { MeasurementUnit } from '../measurements/units/units'
 import CustomError from '../utils/errors/CustomError'
 
 export default class SupportedUseCaseWiseBreakdown<T extends MeasurementType[]> implements SubjectMeasurementBreakdown<T> {
-  constructor(
-    readonly measurementContext: MeasurementSubject<T>
-  ) {}
-
-  private convertToAreaOrVolume(...paramUnits: MeasurementUnit<T[number]>[]): MeasurementUnit<T[number]> {
+  private convertToAreaOrVolume(...paramUnits: MeasurementUnit<T[number]>[]): MeasurementUnit<MeasurementType> {
     if (paramUnits.every(unit => paramUnits[0] !== unit)) {
       throw new CustomError('conversionErrorForDifferentMeasurementTypes')
     }
@@ -24,39 +19,39 @@ export default class SupportedUseCaseWiseBreakdown<T extends MeasurementType[]> 
     if (paramUnits.length == 2) {
       switch (paramUnits[0]) {
         case Unit.millimeter:
-          return Unit.squareMm as MeasurementUnit<T[number]>
+          return Unit.squareMm
         case Unit.centimeter:
-          return Unit.squareCm as MeasurementUnit<T[number]>
+          return Unit.squareCm
         case Unit.meter:
-          return Unit.squareMeter as MeasurementUnit<T[number]>
+          return Unit.squareMeter
         case Unit.kilometer:
-          return Unit.squareKm as MeasurementUnit<T[number]>
+          return Unit.squareKm
         case Unit.foot:
-          return Unit.squareFeet as MeasurementUnit<T[number]>
+          return Unit.squareFeet
         case Unit.inch:
-          return Unit.squareInch as MeasurementUnit<T[number]>
+          return Unit.squareInch
         case Unit.mile:
-          return Unit.squareMile as MeasurementUnit<T[number]>
+          return Unit.squareMile
       }
     }
   
     if (paramUnits.length == 3) {
       switch (paramUnits[0]) {
         case Unit.millimeter:
-          return Unit.mmCube as MeasurementUnit<T[number]>
+          return Unit.mmCube
         case Unit.centimeter:
-          return Unit.cmCube as MeasurementUnit<T[number]>
+          return Unit.cmCube
         case Unit.meter:
-          return Unit.meterCube as MeasurementUnit<T[number]>
+          return Unit.meterCube
         case Unit.foot:
-          return Unit.cubicFeet as MeasurementUnit<T[number]>
+          return Unit.cubicFeet
       }
     }
   
     return paramUnits[0]
   }
 
-  private getMeasurementForUseCase(inputValue: NumericValue, ...measurements: Measurement<T[number]>[]): Measurement<T[number]> {
+  private getMeasurementForUseCase(inputValue: NumericValue, ...measurements: Measurement<T[number]>[]): Measurement<MeasurementType> {
     const { multipliedValue, measurementUnits } = measurements
       .reduce((acc: { multipliedValue: NumericValue, measurementUnits: MeasurementUnit<T[number]>[] }, current) => ({ 
         multipliedValue: multiply(acc.multipliedValue, current.value), 
@@ -71,7 +66,7 @@ export default class SupportedUseCaseWiseBreakdown<T extends MeasurementType[]> 
     useCaseWiseMeasurements: Record<T[number], Measurement<T[number]>[]>, 
     supportedUnitStandard?: MeasurementStandard,
   ): Record<T[number], Measurement<T[number]>[]> {
-    return this.measurementContext.supportedUseCases.reduce((useCaseWiseMeasurementBreakdown, measurementType) => {
+    return (Object.keys(useCaseWiseMeasurements) as T).reduce((useCaseWiseMeasurementBreakdown, measurementType) => {
       const unitsBreakdown = new BreakdownToAppropriateUnits(measurementType, supportedUnitStandard)
       const unitConverter = new UniversalUnitConverter(getConversionFactor(measurementType))
       

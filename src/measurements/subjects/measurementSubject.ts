@@ -1,7 +1,9 @@
 import { MeasurementType } from '../types'
 
+type MeasurementContext = 'currency'
+
 type MeasurementSubject<T extends MeasurementType[]> = { 
-  type: string
+  type: MeasurementContext
   supportedUseCases: T
 }
 
